@@ -1,0 +1,16 @@
+public class MainClass{
+    public static void main(String args[ ]){
+    Teacher ta=new Teacher();
+    ta.a=12;
+    ta.b=236;
+    double tadd=ta.add();
+    System.out.println("和为:"+tadd);
+    Teacher ts=new Teacher();
+    ts.a=234;
+    ts.b=120;
+    double tsub=ts.sub();
+    System.out.println("差为:"+tsub);
+    Student s=new Student();
+    s.speak();
+    }
+}

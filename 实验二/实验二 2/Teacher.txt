@@ -1,0 +1,15 @@
+public class Teacher
+{
+    double a;
+    double b;
+    double add()
+    {
+    double he=a+b;
+    return sum;
+    }
+    double sub()
+    {
+    double cha=a-b;
+    return cha;
+    }
+}
