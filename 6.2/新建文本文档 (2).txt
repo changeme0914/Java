@@ -1,0 +1,22 @@
+package tom2.jierui2;
+import tom1.jierui1.Student;
+import java.util.Scanner;
+public class classmain {
+    public static void main(String[] args) {
+        Student []s=new Student[2];
+        s[0]=new Student("张一");
+        s[1]=new Student(19,"王二");
+        Scanner reader=new Scanner(System.in);
+        System.out.print("输入学生的年龄: ");
+        int  age=reader.nextInt();
+        for(int i=0;i<2;i++)
+        {
+            if(s[i].get1()==age)
+            {
+                System.out.println(s[i].get2());
+            }
+        }
+
+
+    }
+}
