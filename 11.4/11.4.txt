@@ -1,0 +1,55 @@
+package Exmaple;
+
+import java.io.*;
+
+class Unit implements Serializable{
+	String nameString; //单位名字
+	String proString;  //单位属性
+	String phone;	   //单位电话
+	String addString;  //单位地址
+	public Unit (String nameString,String proString,String phone,String addString) {
+		this.nameString = nameString;
+		this.proString = proString;
+		this.phone = phone;
+		this.addString = addString;
+	}
+}
+
+public class Example3_3{
+	public static void main(String[] args) {
+		Unit SDTBU = new Unit("山东工商学院","事业单位",
+				"0535-690402","山东省烟台市莱山区滨海中路191号");
+		try {
+			File file = new File("C:\\ch10\\山东工商学院单位信息.txt");
+			FileOutputStream fileOut = new FileOutputStream(file);
+			ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+			
+			objectOut.writeObject(SDTBU);
+			objectOut.flush();
+			objectOut.close();
+			}
+		catch(IOException e){
+			System.out.println(e);	
+		}
+		
+		try {
+			FileInputStream fileIn = new FileInputStream("C:\\\\ch10\\\\山东工商学院单位信息.txt");
+			ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+			
+			Unit show_SDTBU = (Unit)objectIn.readObject();
+			objectIn.close();
+			System.out.println("单位名字："+ show_SDTBU.nameString);
+			System.out.println("单位属性："+ show_SDTBU.proString);
+			System.out.println("单位电话："+ show_SDTBU.phone);
+			System.out.println("单位地址："+ show_SDTBU.addString);
+			}
+		catch(ClassNotFoundException e) {
+			System.out.println("读不出对象");
+		}
+		catch(IOException e) {
+			System.out.println(e);
+		}
+	}
+
+}
+ 
