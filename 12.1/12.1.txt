@@ -1,0 +1,63 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class windos {
+    public static void main(String args[]){
+        JFrame jf=new JFrame("寻源平台");
+        jf.setSize(300,200);
+        jf.setLocationRelativeTo(null);
+        Container container=jf.getContentPane();
+        container.setBackground(Color.white);
+        jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        jf.setVisible(true);
+        JMenuBar menuBar=new JMenuBar();
+        JMenu mnue_log=new JMenu("用户登录");
+        JMenu mnue_need=new JMenu("物资需求");
+        JMenu mnue_buy=new JMenu("阿里直采");
+        JMenu mnue_con=new JMenu("联系我们");
+        menuBar.add(mnue_log);
+        menuBar.add(mnue_need);
+        menuBar.add(mnue_buy);
+        menuBar.add(mnue_con);
+        JMenuItem log_MenuI=new JMenuItem("用户登录");
+        JMenuItem de_MenuI=new JMenuItem("用户退出");
+        mnue_log.add(log_MenuI);
+        mnue_log.add(de_MenuI);
+        JMenuItem all_M=new JMenuItem("概览");
+        JMenuItem mask_M=new JMenuItem("防疫口罩");
+        JMenuItem col_M=new JMenuItem("防护服");
+        mnue_need.add(all_M);
+        mnue_need.add(mask_M);
+        mnue_need.addSeparator();
+        mnue_need.add(col_M);
+        jf.setJMenuBar(menuBar);
+        jf.setVisible(true);
+        GridBagLayout gridbag=new GridBagLayout();
+        GridBagConstraints c=null;
+        JPanel panel=new JPanel(gridbag);
+        JTextField into_tArea=new JTextField("请输入您的身份证号/手机号/用户名");
+        JPasswordField pass_tAField=new JPasswordField("请输入密码");
+        JPanel butPanel=new JPanel(new GridLayout(1,2));
+        JButton log_button=new JButton("登录");
+        JButton reg_button=new JButton("注册");
+        butPanel.add(log_button);
+        butPanel.add(reg_button);
+        c=new GridBagConstraints();
+        c.gridwidth=GridBagConstraints.REMAINDER;
+        c.fill=GridBagConstraints.BOTH;
+        gridbag.addLayoutComponent(into_tArea,c);
+        c=new GridBagConstraints();
+        c.fill=GridBagConstraints.BOTH;
+        gridbag.addLayoutComponent(butPanel,c);
+        panel.add(into_tArea);
+        panel.add(pass_tAField);
+        panel.add(butPanel);
+        JTextArea show_Field=new JTextArea("寻源产品展示");
+        JSplitPane splitPane=new JSplitPane();
+        splitPane.setLeftComponent(panel);
+        splitPane.setRightComponent(show_Field);
+        jf.add(splitPane);
+        jf.setVisible(true);
+
+    }
+}
