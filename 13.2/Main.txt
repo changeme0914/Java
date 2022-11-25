@@ -1,0 +1,188 @@
+package xz14;
+
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class Main {
+    public static void main(String[] args){
+        JFrame jf=new JFrame("寻源平台");
+        jf.setSize(500,200);
+        jf.setLocationRelativeTo(null);
+        Container container=jf.getContentPane();
+        container.setBackground(Color.white);
+        jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        jf.setVisible(true);
+
+        JMenuBar menuBar=new JMenuBar();
+        JMenu mneu_log=new JMenu("用户登录");
+        JMenu mneu_need=new JMenu("物资需求");
+        JMenu mneu_buy=new JMenu("阿里直采");
+        JMenu mneu_con=new JMenu("联系我们");
+        menuBar.add(mneu_log);
+        menuBar.add(mneu_need);
+        menuBar.add(mneu_buy);
+        menuBar.add(mneu_con);
+
+        JMenuItem log=new JMenuItem("用户登录");
+        JMenuItem de=new JMenuItem("用户退出");
+        mneu_log.add(log);
+        mneu_log.add(de);
+        JMenuItem all=new JMenuItem("概览");
+        JMenuItem mask=new JMenuItem("防疫口罩");
+        JMenuItem col=new JMenuItem("防护服");
+        mneu_need.add(all);
+        mneu_need.addSeparator();
+        mneu_need.add(mask);
+        mneu_need.add(col);
+        jf.setJMenuBar(menuBar);
+        jf.setVisible(true);
+
+        GridBagLayout bag=new GridBagLayout();
+        GridBagConstraints c=null;
+        JPanel panel=new JPanel(bag);
+        JTextField info_tArea=new JTextField("请输入您的身份证号/手机号码/用户名");
+        JPasswordField pass_tAField=new JPasswordField("请输入密码");
+        JPanel butPanel=new JPanel(new GridLayout(1,2));
+        JButton log_button=new JButton("登录");
+        JButton reg_button=new JButton("注册");
+        butPanel.add(log_button);
+        butPanel.add(reg_button);
+
+        c=new GridBagConstraints();
+        c.gridwidth=GridBagConstraints.REMAINDER;
+        c.fill=GridBagConstraints.BOTH;
+        bag.addLayoutComponent(info_tArea,c);
+        c=new GridBagConstraints();
+        c.gridwidth=GridBagConstraints.REMAINDER;
+        c.fill=GridBagConstraints.BOTH;
+        bag.addLayoutComponent(pass_tAField,c);
+        c=new GridBagConstraints();
+        c.fill=GridBagConstraints.BOTH;
+        bag.addLayoutComponent(butPanel,c);
+
+        panel.add(info_tArea);
+        panel.add(pass_tAField);
+        panel.add(butPanel);
+        JTextArea show_Field=new JTextArea("寻源产品展示");
+        JSplitPane splitPane=new JSplitPane();
+        splitPane.setLeftComponent(panel);
+        splitPane.setRightComponent(show_Field);
+        jf.add(splitPane);
+        jf.setVisible(true);
+        class CClickbutton implements ActionListener {
+            JTextField logObject;
+            JPasswordField passObject;
+            String log_nameString;
+            char[] password;
+            CClickbutton(JTextField logObject,JPasswordField passObject){
+                this.logObject=logObject;
+                this.passObject=passObject;
+                char[] password=new char[6];
+            }
+            public void actionPerformed(ActionEvent e){
+                log_nameString=logObject.getText();
+                password=passObject.getPassword();
+                System.out.print("用户名为："+log_nameString+";密码为：");
+                for(char c:password){
+                    System.out.print(c);
+                }
+            }
+        }
+        class CGetCheckboxstate implements ItemListener {
+            public void itemStateChanged(ItemEvent e){
+                JCheckBox check_box;
+                check_box=(JCheckBox)e.getSource();//得到当前事件源对象
+                if(check_box.isSelected()){
+                    System.out.println("已记住密码");
+                }
+                else{
+                    System.out.println("取消记住密码");
+                }
+
+            }
+        }
+        class CReg_panel extends JFrame{
+            JTextField ID_text;
+            String user_ID;
+            JTextField username_text;
+            String usernameString;
+            JTextField phone_text;
+            String number;
+            public CReg_panel(){
+                init();
+                setVisible(true);
+                setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            }
+            void init(){
+                //设置平台frame
+                setTitle("注册");
+                setLayout(new FlowLayout());
+                setSize(250,260);
+                setLocationRelativeTo(null);
+                add(new JLabel("身份证："));
+                JTextField text=new JTextField(15);
+                add(text);
+                add(new JLabel("用户名："));
+                text=new JTextField(15);
+                add(text);
+                add(new JLabel("电话："));
+                phone_text=new JTextField(15);
+                add(phone_text);
+                add(new JLabel("性别:"));
+                ButtonGroup radioGroup=new ButtonGroup();
+                JRadioButton radio_b=new JRadioButton("男");
+                JRadioButton radio_g=new JRadioButton("女");
+                add(radio_b);
+                add(radio_g);
+                add(new JLabel("            "));
+                JButton button_reg=new JButton("确认");
+                JButton button_can=new JButton("取消");
+                add(button_reg);
+                add(button_can);
+                setVisible(true);
+                class CkeypressListener implements KeyListener {
+                    CReg_panel Reg_panel;
+                    CkeypressListener(CReg_panel Reg_panel){
+                        this.Reg_panel=Reg_panel;
+                    }
+                    public void keyReleased(KeyEvent e){
+                        if(e.getKeyCode()== KeyEvent.VK_ENTER){
+                            Reg_panel.user_ID=Reg_panel.ID_text.getText();
+                            Reg_panel.usernameString=Reg_panel.username_text.getText();
+                            Reg_panel.number=Reg_panel.phone_text.getText();
+                            Reg_panel.dispose();
+                        }
+                    }
+                    public void keyTyped(KeyEvent e){}
+                    public void keyPressed(KeyEvent e){}
+                }
+                CkeypressListener keylisten=new CkeypressListener(this);
+                text.addKeyListener(keylisten);
+
+            }
+
+        }
+        class CClickbutlisten implements MouseListener {
+            public void mousePressed(MouseEvent e){}
+            public void mouseReleased(MouseEvent e){}
+            public void mouseEntered(MouseEvent e){}
+            public void mouseExited(MouseEvent e){}
+            public void mouseClicked(MouseEvent e){    //弹出注册页面
+                CReg_panel reg_panel=new CReg_panel();
+            }
+        }
+
+        CClickbutton clicklisten=new CClickbutton(info_tArea,pass_tAField);//给按钮添加一个事件监视器
+        log_button.addActionListener(clicklisten);
+        JCheckBox ifRemberpassw=new JCheckBox("记住密码");  //增加一个选择框
+        panel.add(ifRemberpassw);
+        CGetCheckboxstate itemlisten=new CGetCheckboxstate();   //给选择框增加一个选项事件监视器
+        ifRemberpassw.addItemListener(itemlisten);
+        CClickbutlisten clickbutlisten=new CClickbutlisten();  //给注册添加一个鼠标事件监视器
+        reg_button.addMouseListener(clickbutlisten);
+
+
+    }
+}
